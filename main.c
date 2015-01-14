@@ -2,8 +2,7 @@
 #include<stdio.h>
 #include"hashTable.h"
 
-void
-main()
+void main()
 {
   //variables
   //ops
