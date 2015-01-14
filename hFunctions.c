@@ -30,16 +30,5 @@ hashFunction(int val,int (*f)(int))
   return ret;
 }
 
-//hash table operations
-void
-insertVal(int value, Head *hd)
-{
-  //variables
-  Node *nd;
-  //ops
-  nd = malloc(sizeof(Node));
-  nd->val = value;
-  nd->next = NULL;
-  hd->list[hd->size++] = nd;
-}
+//hash table ops
 
