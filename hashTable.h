@@ -19,3 +19,4 @@ int hashFunction(int val, int (*f)(int));
 void insertValue(int index, int value, Head *hd);
 void addValue(int value, int (*f)(int), Head *hd);
 void printTable(Head *hd);
+void interface(int (*f)(int), Head *table);

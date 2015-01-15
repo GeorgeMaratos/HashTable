@@ -68,7 +68,7 @@ addValue(int value, int (*f)(int), Head *hd)
   if(DEBUG) printf("value [%d] hash [%d]\n",value, index);
   insertValue(index, value, hd);
 }
-//debugging function
+//debugging functions
 void
 printTable(Head *hd)
 {
@@ -81,5 +81,26 @@ printTable(Head *hd)
   {
     if(hd->list[i] != NULL)
       printf("%d : %d\n", i, hd->list[i]->val);
+  }
+}
+void
+interface(int (*f)(int), Head *table)
+{
+  //variables
+  int input;
+  //ops
+  printf("Hash Table Debugging\n");
+  table = makeTable();
+  for(;;)
+  {
+    printf("Enter Value: ");
+    scanf("%d", &input);
+    switch(input)
+    {
+      case 0: return;
+      default:
+	addValue(input, f, table);
+	break;
+    }
   }
 }

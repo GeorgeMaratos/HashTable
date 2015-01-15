@@ -12,22 +12,7 @@ int hasher(int value)
 void main()
 {
   //variables
-  int input;
   Head *table;
-  //ops
-  printf("Hash Table Debugging\n");
-  table = makeTable();
-  for(;;)
-  {
-    printf("Enter Value: ");
-    scanf("%d", &input);
-    switch(input)
-    {
-      case 0: continue;
-      default:
-	addValue(input, hasher, table);
-	break;
-    }
-  }
+  interface(hasher,table);
   if(DEBUG) printTable(table); 	
 }
