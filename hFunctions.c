@@ -48,6 +48,15 @@ insertValue(int index, int value, Head *hd)
   }
 }
 
+void 
+addValue(int value, int (*f)(int), Head *hd)
+{
+  //variables
+  int index;
+  //ops
+  index = hashFunction(value,f);
+  insertValue(index, value, hd);
+}
 //debugging function
 void
 printTable(Head *hd)
@@ -57,7 +66,7 @@ printTable(Head *hd)
   //ops
   if(hd == NULL) return;
   if(hd->list == NULL) return;
-  for(i=0;i<capacity;i++)
+  for(i=0;i<hd->capacity;i++)
   {
     if(hd->list[i] != NULL)
       printf("%d : %d\n", i, hd->list[i]->val);

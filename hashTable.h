@@ -12,3 +12,10 @@ typedef struct head
   int size, capacity;
   struct node **list;
 }Head;
+
+//functions from hFunctions.c
+Head *makeTable();
+int hashFunction(int val, int (*f)(int));
+void insertValue(int index, int value, Head *hd);
+void addValue(int value, int (*f)(int), Head *hd);
+void printTable(Head *hd);
