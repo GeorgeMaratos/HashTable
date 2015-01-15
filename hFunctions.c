@@ -8,6 +8,7 @@ Head*
 makeTable()
 {
   //variables
+  int i;
   Head *table;
   //ops
   table = malloc(sizeof(Head));
@@ -15,6 +16,8 @@ makeTable()
   table->capacity = 10;
   if(DEBUG) printf("Hash Table Allocated Size: %d\n", table->capacity);
   table->list = malloc(sizeof(Node*) * 10);
+  for(i=0;i<10;i++)
+    table->list[i] = NULL;
   //return
   return table;
 }
@@ -77,10 +80,15 @@ printTable(Head *hd)
   //ops
   if(hd == NULL) return;
   if(hd->list == NULL) return;
+  if(DEBUG)
+  { 
+    printf("Printing Table\n");
+    printf("Capacity: %d\n", hd->capacity);
+  }
   for(i=0;i<hd->capacity;i++)
   {
     if(hd->list[i] != NULL)
-      printf("%d : %d\n", i, hd->list[i]->val);
+      printf("%d\n", i);
   }
 }
 void
