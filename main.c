@@ -16,5 +16,18 @@ void main()
   Head *table;
   //ops
   printf("Hash Table Debugging\n");
-  
+  table = makeTable();
+  for(;;)
+  {
+    printf("Enter Value: ");
+    scanf("%d", &input);
+    switch(input)
+    {
+      case 0: continue;
+      default:
+	addValue(input, hasher, table);
+	break;
+    }
+  }
+  if(DEBUG) printTable(table); 	
 }
