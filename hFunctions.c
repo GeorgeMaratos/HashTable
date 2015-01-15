@@ -13,6 +13,7 @@ makeTable()
   table = malloc(sizeof(Head));
   table->size = 0;
   table->capacity = 10;
+  if(DEBUG) printf("Hash Table Allocated Size: %d\n", table->capacity);
   table->list = malloc(sizeof(Node*) * 10);
   //return
   return table;
@@ -37,10 +38,19 @@ insertValue(int index, int value, Head *hd)
   //variables
   Node *nd;
   //ops
-  if(index == hd->capacity) return;
-  if(hd->list[index] != NULL) insertValue(index + 1, value, hd);
+  if(index == hd->capacity) 
+  {
+   if(DEBUG) printf("No space for [%d]\n", value);
+   return;
+  }
+  if(hd->list[index] != NULL)
+  {
+    if(DEBUG) printf("index [%d] full\n", index);
+    insertValue(index + 1, value, hd);
+  }
   else
   {
+    if(DEBUG) printf("Inserting value [%d] at index [%d]\n", value, index); 
     nd = malloc(sizeof(Node));
     nd->val  = value;
     nd->next = NULL;
@@ -54,7 +64,8 @@ addValue(int value, int (*f)(int), Head *hd)
   //variables
   int index;
   //ops
-  index = hashFunction(value,f);
+  index = hashFunction(value,f) % hd->capacity;
+  if(DEBUG) printf("value [%d] hash [%d]\n",value, index);
   insertValue(index, value, hd);
 }
 //debugging function
