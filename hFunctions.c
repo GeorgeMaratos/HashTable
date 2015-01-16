@@ -35,6 +35,39 @@ hashFunction(int val,int (*f)(int))
 }
 
 //hash table ops
+
+//Insert Function for chaining
+void
+insertCValue(int index, int value, Head *hd)
+{
+  //variables
+  Node *ptr, *nd;
+  //ops
+  if(hd->list[index] == NULL)
+  {
+    if(DEBUG) printf("Inserting [%d] into [%d]\n", value , index);
+    nd = malloc(sizeof(Node));
+    nd->val = value;
+    nd->next = NULL;
+    hd->list[index] = nd;
+    hd->size++;
+    return;
+  }
+  else
+  {
+    if(DEBUG) printf("Collision detected at [%d] Insert into end of list\n", index);
+    ptr = hd->list[index];
+    while(ptr->next != NULL)
+      ptr = ptr->next;
+    nd = malloc(sizeof(Node));
+    nd->val = value;
+    nd->next = NULL;
+    ptr->next = nd;
+    hd->size++;
+    return;
+  }
+}
+//Insert Function for open addressing
 void
 insertValue(int index, int value, Head *hd)
 {
@@ -60,7 +93,7 @@ insertValue(int index, int value, Head *hd)
     hd->list[index] = nd;
   }
 }
-
+//wrapper function for recursive open addressing insertion function
 void 
 addValue(int value, int (*f)(int), Head *hd)
 {
@@ -69,7 +102,8 @@ addValue(int value, int (*f)(int), Head *hd)
   //ops
   index = hashFunction(value,f) % hd->capacity;
   if(DEBUG) printf("value [%d] hash [%d]\n",value, index);
-  insertValue(index, value, hd);
+//  insertValue(index, value, hd);
+  insertCValue(index, value, hd);
 }
 //debugging functions
 void
@@ -77,6 +111,7 @@ printTable(Head *hd)
 {
   //variables
   int i;
+  Node *ptr;
   //ops
   if(hd == NULL) return;
   if(hd->list == NULL) return;
@@ -88,8 +123,18 @@ printTable(Head *hd)
   for(i=0;i<10;i++)
   {
     if(hd->list[i] != NULL)
-      printf("%d\n", i);
-  }
+    {
+      printf("%d: ", i);
+      ptr = hd->list[i];
+      do
+      {
+        printf("[%d] ->", hd->list[i]->val);
+        ptr = ptr->next;
+      }
+      while(ptr != NULL);
+      printf("\n");
+    }
+  } 
 }
 void
 interface(int (*f)(int), Head *table)
