@@ -5,7 +5,7 @@
 
 //memory allocation
 Head*
-makeTable()
+makeTable(int sz)
 {
   //variables
   int i;
@@ -13,13 +13,24 @@ makeTable()
   //ops
   table = malloc(sizeof(Head));
   table->size = 0;
-  table->capacity = 10;
+  table->capacity = sz;
   if(DEBUG) printf("Hash Table Allocated Size: %d\n", table->capacity);
-  table->list = malloc(sizeof(Node*) * 10);
-  for(i=0;i<10;i++)
+  table->list = malloc(sizeof(Node*) * sz);
+  for(i=0;i<sz;i++)
     table->list[i] = NULL;
   //return
   return table;
+}
+
+Node *
+makeNode(int value)
+{
+  //variables
+  Node *nd;
+  //ops
+  nd = malloc(sizeof(Node));
+  nd->val = value;
+  nd->next = NULL;
 }
 
 //hash function
@@ -46,9 +57,7 @@ insertCValue(int index, int value, Head *hd)
   if(hd->list[index] == NULL)
   {
     if(DEBUG) printf("Inserting [%d] into [%d]\n", value , index);
-    nd = malloc(sizeof(Node));
-    nd->val = value;
-    nd->next = NULL;
+    nd = makeNode(value);
     hd->list[index] = nd;
     hd->size++;
     return;
@@ -59,9 +68,7 @@ insertCValue(int index, int value, Head *hd)
     ptr = hd->list[index];
     while(ptr->next != NULL)
       ptr = ptr->next;
-    nd = malloc(sizeof(Node));
-    nd->val = value;
-    nd->next = NULL;
+    nd = makeNode(value);
     ptr->next = nd;
     hd->size++;
     return;
@@ -87,9 +94,7 @@ insertValue(int index, int value, Head *hd)
   else
   {
     if(DEBUG) printf("Inserting value [%d] at index [%d]\n", value, index); 
-    nd = malloc(sizeof(Node));
-    nd->val  = value;
-    nd->next = NULL;
+    nd = makeNode(value);
     hd->list[index] = nd;
   }
 }

@@ -14,7 +14,8 @@ typedef struct head
 }Head;
 
 //functions from hFunctions.c
-Head *makeTable();
+Head *makeTable(int sz);
+Node *makeNode(int value);
 int hashFunction(int val, int (*f)(int));
 void insertValue(int index, int value, Head *hd);
 void insertCValue(int index, int value, Head *hd);

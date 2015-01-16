@@ -14,7 +14,7 @@ void main()
   //variables
   Head *table;
   //ops
-  table = makeTable();
+  table = makeTable(10);
   interface(hasher,table);
   if(DEBUG) printTable(table); 	
 }
