@@ -13,6 +13,8 @@ void main()
 {
   //variables
   Head *table;
+  //ops
+  table = makeTable();
   interface(hasher,table);
   if(DEBUG) printTable(table); 	
 }

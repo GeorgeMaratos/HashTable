@@ -85,7 +85,7 @@ printTable(Head *hd)
     printf("Printing Table\n");
     printf("Capacity: %d\n", hd->capacity);
   }
-  for(i=0;i<hd->capacity;i++)
+  for(i=0;i<10;i++)
   {
     if(hd->list[i] != NULL)
       printf("%d\n", i);
@@ -98,7 +98,6 @@ interface(int (*f)(int), Head *table)
   int input;
   //ops
   printf("Hash Table Debugging\n");
-  table = makeTable();
   for(;;)
   {
     printf("Enter Value: ");
